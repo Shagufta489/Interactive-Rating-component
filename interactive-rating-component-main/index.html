@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+  <link href='https://fonts.googleapis.com/css?family=Overpass' rel='stylesheet'>
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  
+  <title>Frontend Mentor | Interactive rating component</title>
+
+  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+  <style>
+    body{
+      color: white;
+      font-size: 15px;
+      background-color: hsl(216, 12%, 8%);
+      font-family: "Overpass";
+    }
+    .container{
+      background-color: hsl(213, 19%, 18%);
+      height: 300px;
+      width: 300px;
+      margin-top: 10%;
+      margin-left: 38%;
+      border: 1px;
+      border-radius: 30px;
+      padding: 30px;
+      position: absolute;
+      z-index: 1;
+      position: fixed;
+    }  
+    #star{
+      height: 40px;
+    }
+    #starHolder{
+      height: 40px;
+      width: 40px;
+      border-radius: 50%;
+      background-color: hsl(216, 12%, 54%);
+    }
+    #starHolder img{
+      margin: 12px;
+    }
+    #head{
+      height: 40px;
+    }
+    .heading{
+      font-size: 30px;
+    }
+    #text{
+      font-size: 15px;
+    }
+    #rating{
+      margin: 10px;
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+      cursor: pointer;
+    }
+    .rate:hover{
+      background-color: hsl(25, 97%, 53%);
+    }
+    .rate{
+      display: inline-block;
+      height: 45px;
+      width: 45px;
+      border-radius: 50%;
+      text-align: center;
+      background-color: hsl(216, 12%, 54%);
+      transition: 0.3s;
+    }
+    #submit{
+      height: 40px;
+      width: 250px;
+      margin: 20px;
+      border-radius: 10px;
+      background-color: hsl(25, 97%, 53%);
+      border: 1px solid hsl(25, 97%, 53%);
+      cursor: pointer;
+      color:white;
+      transition: 0.3s;
+    }
+    #submit:hover{
+      color:white;
+      background-color: hsl(25, 97%, 53%);
+    }
+    .stack-top{
+      z-index: 2;
+      display: none;
+    }
+    .score{
+      height: 25px;
+      width: 180px;
+      margin: 20px 60px;
+      border-radius: 13px;
+      background-color: hsl(217, 12%, 63%);   
+    }
+    #scoreDisplay{
+      color:hsl(25, 97%, 53%);
+      font-size: 17px;
+      text-align: center;
+    }
+    .thankyou img{
+      height: 100px;
+      margin: 5px 60px;
+    }
+    .tyMsg{
+      text-align: center;
+    }
+    .attribution { 
+      font-size: 11px; 
+      text-align: center;
+       margin-left: 50px;
+    }
+    .attribution a { 
+      color: hsl(228, 45%, 44%); 
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Rating state start -->
+
+  <div class="container">
+    <div id="star">
+      <div id="starHolder">
+        <img src="./images/icon-star.svg" />
+      </div>
+    </div>
+    <div id="head">
+      <p  class="heading" >How did we do?</p>
+    </div>
+    <div id="text">
+      <p>Please let us know how we did with your support request. All feedback is appreciated 
+        to help us improve our offering!</p>
+    </div>
+    <div id="rating">
+      <div class="rate" id="1"><p>1</p></div>
+      <div class="rate" id="2"><p>2</p></div>
+      <div class="rate" id="3"><p>3</p></div>
+      <div class="rate" id="4"><p>4</p></div>
+      <div class="rate" id="5"><p>5</p></div>
+    </div>
+    <button id="submit">SUBMIT</button>
+  </div>
+
+
+  <!-- Rating state end -->
+
+  <!-- Thank you state start -->
+
+  <div id="thankyouState" class="container stack-top">
+    <div class="thankyou">
+      <img src="./images/illustration-thank-you.svg" />
+    </div>
+    <div class="score">
+      <p id="scoreDisplay">Select Rating Star</p>
+    </div>
+    <div id="thankYou">
+      <p class="heading tyMsg">Thank You!</p>
+    </div>
+    <div class="text">
+      <p class="tyMsg"> We appreciate you taking the time to give a rating. If you ever need more support, 
+        don’t hesitate to get in touch!</p>
+    </div>
+  </div>
+
+  <!-- Thank you state end -->
+
+  
+  <div class="attribution">
+    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
+    Coded by <a href="#">Shagufta</a>.
+  </div>
+
+  <script>
+    document.getElementById("submit").onmouseover = function(){
+      mouseover();
+    }
+    document.getElementById("submit").onmouseout = function(){
+      mouseout();
+    }
+    function mouseover(){
+      document.getElementById("submit").style.color="hsl(25, 97%, 53%)";
+      document.getElementById("submit").style.backgroundColor="white";
+    }
+    function mouseout(){
+      document.getElementById("submit").style.color="white";
+      document.getElementById("submit").style.backgroundColor="hsl(25, 97%, 53%)";
+    }
+
+    document.getElementById("submit").onclick = function(){
+      thankyou();
+    }
+    function thankyou(){
+      document.getElementById("thankyouState").style.display = "block";
+    }
+    var score;
+    document.getElementById("1").onclick = function(){
+      
+      document.getElementById("1").style.backgroundColor = "hsl(25, 97%, 53%)";
+      score = document.getElementById("1").id;
+      document.getElementById("scoreDisplay").innerHTML = "You selected " + score + " out of 5";
+    }
+    document.getElementById("2").onclick = function(){
+      
+      
+      document.getElementById("2").style.backgroundColor = "hsl(25, 97%, 53%)";
+      score = document.getElementById("2").id;
+      document.getElementById("scoreDisplay").innerHTML = "You selected " + score + " out of 5";
+    }
+    document.getElementById("3").onclick = function(){
+      
+      document.getElementById("3").style.backgroundColor = "hsl(25, 97%, 53%)";
+      score = document.getElementById("3").id;
+      document.getElementById("scoreDisplay").innerHTML = "You selected " + score + " out of 5";
+    }
+    document.getElementById("4").onclick = function(){
+      
+      document.getElementById("4").style.backgroundColor = "hsl(25, 97%, 53%)";
+      score = document.getElementById("4").id;
+      document.getElementById("scoreDisplay").innerHTML = "You selected " + score + " out of 5";
+    }
+    document.getElementById("5").onclick = function(){
+      document.getElementById("5").style.backgroundColor = "hsl(25, 97%, 53%)";
+      score = document.getElementById("5").id;
+      document.getElementById("scoreDisplay").innerHTML = "You selected " + score + " out of 5";
+    }
+  </script>
+</body>
+</html>
